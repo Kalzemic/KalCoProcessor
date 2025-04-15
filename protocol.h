@@ -1,0 +1,14 @@
+#ifndef _PROTOCOL_
+#define _PROTOCOL_
+
+#define CMD_BEGIN_CONFIG 0xA1
+#define CMD_SEND_SIZE 0xA2
+#define CMD_SEND_MATRIX_A 0xA3
+#define CMD_SEND_MATRIX_B 0xA4
+#define CMD_EXECUTE_MUL 0xA5
+#define CMD_RESULT_READY 0xA6
+#define CMD_SEND_RESULT_DATA 0xA7
+
+#define MAX_MATRIX_SIZE 8
+
+#endif //_PROTOCOL_
