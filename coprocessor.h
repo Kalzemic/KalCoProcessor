@@ -1,11 +1,10 @@
 #ifndef _COPROCESSOR_
 #define _COPROCESSOR_
 
+#include "stm32f1xx_hal.h"
+#include "stm32f1xx_hal_dma.h"
 #include <stdint.h>
 #include "protocol.h"
-
-#include "stm32f1xx.h"
-#include "stm32f1xx_hal.h"
 #include "stm32f1xx_hal_def.h"
 #include <string.h>
 #include "stm32f1xx_hal_rcc.h"
@@ -22,5 +21,7 @@ void send_result(int16_t matrix[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE]);
 void matrix_multiply(void);
 void handle_command(uint8_t command);
 void MX_GPIO_Init(void);
+void MX_SPI1_Init(void);
+void SystemClock_Config(void);
 
 #endif //_COPROCESSOR_

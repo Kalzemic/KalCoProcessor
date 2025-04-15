@@ -2,24 +2,24 @@
 .cpu cortex-m3
 .thumb
 
-.global _estack ;;show stack pointer to linker
-.global Reset_Handler ;; show startup function
+ .global _estack /*show stack pointer to linker*/
+.global Reset_Handler /*show startup function*/
 
 .section .isr_vector, "a", %progbits
-
+.align 2
 .word _estack 
 .word Reset_Handler
-.word Default_Handler ;;handler for NMI
-.word Default_Handler ;;handler for Hardfault
-.word Default_Handler ;; handler for memory management  
-.word Default_Handler ;;hander for bus fault
-.word Default_Handler ;; Usage Fault
-.word 0               ;; reserved memory zeroed
+.word Default_Handler /*handler for NMI*/
+.word Default_Handler /*handler for Hardfault*/
+.word Default_Handler /* handler for memory management*/  
+.word Default_Handler /*handler for bus fault*/
+.word Default_Handler /* Usage Fault*/
+.word 0               /* reserved memory zeroed*/
 .word 0
 .word 0 
 .word 0
-.word Default_Handler ;; SVCall
-.word Default_Handler ;;debug monitor
+.word Default_Handler /* SVCall*/
+.word Default_Handler /*debug monitor*/
 .word 0
 .word Default_Handler        /* PendSV */
 .word Default_Handler        /* SysTick */
@@ -27,6 +27,7 @@
 
 
 .section .text.Reset_Handler
+.thumb_func
 .type Reset_Handler, %function
 Reset_Handler:
   /* Copy .data section from Flash to RAM */
@@ -47,6 +48,7 @@ Reset_Handler:
   cmp r0, r1
   it lt
   movlt r2, #0
+  it lt
   strlt r2, [r0], #4
   blt 2b
 
@@ -61,3 +63,4 @@ Reset_Handler:
 .type Default_Handler, %function
 Default_Handler:
   b .
+

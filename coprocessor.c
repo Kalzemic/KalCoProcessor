@@ -14,7 +14,7 @@ void receive_matrix(int16_t matrix[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE])
         for (uint8_t j = 0; j < matrix_size; j++)
         {
             uint8_t data[2] = {0};
-            HAL_SPI_Receive(&hspi1, &data, 2, HAL_MAX_DELAY);
+            HAL_SPI_Receive(&hspi1, data, 2, HAL_MAX_DELAY);
             matrix[i][j] = (data[0] << 8) | data[1];
         }
     }
@@ -89,7 +89,7 @@ void MX_GPIO_Init(void)
     HAL_GPIO_Init(GPIOA, &gpiostruct);
 }
 
-void MX_SPI_Init(void)
+void MX_SPI1_Init(void)
 {
     __HAL_RCC_SPI1_CLK_ENABLE();
 
@@ -126,7 +126,7 @@ void SystemClock_Config(void)
     HAL_RCC_ClockConfig(&RCC_ClkInitStruct, 0x00000000U);
 }
 
-void main(void)
+int main(void)
 {
     HAL_Init();
     SystemClock_Config();
@@ -137,4 +137,6 @@ void main(void)
         uint8_t cmd = receive_byte();
         handle_command(cmd);
     }
+
+    return 0;
 }
