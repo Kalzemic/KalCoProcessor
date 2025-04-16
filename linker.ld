@@ -2,8 +2,8 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-    FLASH(rx)  : ORIGIN = 0x08000000, LENGTH = 64K;
-    RAM(rwx)   : ORIGIN = 0x20000000, LENGTH = 20K;
+    FLASH(rx)  : ORIGIN = 0x08000000, LENGTH = 64K
+    RAM(rwx)   : ORIGIN = 0x20000000, LENGTH = 20K
 }
 
 /* Initial stack pointer set to top of RAM */

@@ -35,7 +35,13 @@ void send_result(int16_t matrix[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE])
 }
 void matrix_multiply(void)
 {
-    memset(matrix_c, 0, sizeof(matrix_c));
+    for (uint8_t i = 0; i < matrix_size; i++)
+    {
+        for (uint8_t j = 0; j < matrix_size; j++)
+        {
+            matrix_c[i][j] = 0;
+        }
+    }
     for (uint8_t i = 0; i < matrix_size; i++)
     {
         for (uint8_t j = 0; j < matrix_size; j++)

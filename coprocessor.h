@@ -6,10 +6,9 @@
 #include <stdint.h>
 #include "protocol.h"
 #include "stm32f1xx_hal_def.h"
-#include <string.h>
 #include "stm32f1xx_hal_rcc.h"
 #include "core_cm3.h"
-extern SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi1;
 uint8_t matrix_size = 0;
 int16_t matrix_a[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];
 int16_t matrix_b[MAX_MATRIX_SIZE][MAX_MATRIX_SIZE];

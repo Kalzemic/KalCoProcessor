@@ -19,22 +19,26 @@ INCLUDES = -I. \
            -I$(CMSIS_DIR)/Include \
            -I$(CMSIS_DIR)/Device/ST/STM32F1xx/Include \
            -I$(HAL_DIR)/Inc \
-		   -I./core/Inc
+           -I./core/Inc
 
 
 CFLAGS = $(CPU) -Wall -O2 -g -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F103xB $(INCLUDES)
 ASFLAGS = $(CPU)
-LDFLAGS = $(CPU) -Tlinker.ld -nostartfiles -nostdlib -Wl,--gc-sections
+LDFLAGS = $(CPU) -Tlinker.ld -nostartfiles -nostdlib -Wl,--gc-sections -lc -lnosys
+
 
 # Source files
 SRCS = startup.s \
        coprocessor.c \
+       ./core/Src/system_stm32f1xx.c \
        $(HAL_DIR)/Src/stm32f1xx_hal.c \
        $(HAL_DIR)/Src/stm32f1xx_hal_gpio.c \
        $(HAL_DIR)/Src/stm32f1xx_hal_spi.c \
        $(HAL_DIR)/Src/stm32f1xx_hal_rcc.c \
-       $(HAL_DIR)/Src/stm32f1xx_hal_cortex.c
-
+       $(HAL_DIR)/Src/stm32f1xx_hal_cortex.c \
+       $(HAL_DIR)/Src/stm32f1xx_hal_dma.c \
+       $(HAL_DIR)/Src/stm32f1xx_hal_tim.c \
+       $(HAL_DIR)/Src/stm32f1xx_hal_pwr.c 
 
 
 
@@ -64,6 +68,8 @@ $(ELF): $(OBJS)
 	arm-none-eabi-as  $(ASFLAGS) $< -o $@
 
 clean:
-	rm -f *.o *.elf *.bin
+	find . -name '*.o' -delete
+	find . -name '*.elf' -delete
+	find . -name '*.bin' -delete
 
 .PHONY: all clean
